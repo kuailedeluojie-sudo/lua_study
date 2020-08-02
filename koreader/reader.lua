@@ -1,5 +1,6 @@
 #!./luajit
 -- 现在开始慢慢学习lua语言，慢慢备注这个开源软件，相信能从这门语言中收获很多之前不知道的知识
+-- 向标准输出koreader的标志
 io.stdout:write([[
 ---------------------------------------------
                 launching...
@@ -12,14 +13,21 @@ io.stdout:write([[
  It's a scroll... It's a codex... It's KOReader!
 
  [*] Current time: ]], os.date("%x-%X"), "\n")
+--刷新输出缓冲区
 io.stdout:flush()
 
 -- Load default settings
+-- 加载设置
 require("defaults")
+-- 加载模块，创建和返回一个表，这个表就像某种命名空间，其中定义的内容是模块中导出的东西
+-- 比如函数和常量
 local DataStorage = require("datastorage")
+
+--以安全模式执行dofile 函数，dofile和require函数一样加载模块，只是在加载的时候执行了一下
 pcall(dofile, DataStorage:getDataDir() .. "/defaults.persistent.lua")
 
 -- Set up Lua and ffi search paths
+-- 加载模块
 require("setupkoenv")
 
 io.stdout:write(" [*] Version: ", require("version"):getCurrentRevision(), "\n\n")

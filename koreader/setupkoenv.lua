@@ -1,7 +1,9 @@
 -- set search path for 'require()'
+--从package.path 路径中寻找指定模块名的Lua文件
 package.path =
     "common/?.lua;rocks/share/lua/5.1/?.lua;frontend/?.lua;" ..
     package.path
+-- 如果找不到则从c标准库中寻找
 package.cpath =
     "common/?.so;common/?.dll;/usr/lib/lua/?.so;rocks/lib/lua/5.1/?.so;" ..
     package.cpath
