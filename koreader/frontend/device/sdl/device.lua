@@ -130,7 +130,7 @@ function Device:init()
     if viewport then
         self.viewport = require("ui/geometry"):new(loadstring("return " .. viewport)())
     end
-
+    --如果是触摸设备
     local touchless = os.getenv("DISABLE_TOUCH") == "1"
     if touchless then
         self.isTouchDevice = no
@@ -276,15 +276,17 @@ function Device:init()
 
     Generic.init(self)
 end
-
+-- 设置日期时间
 function Device:setDateTime(year, month, day, hour, min, sec)
     if hour == nil or min == nil then return true end
     local command
+-- 组包年，月，日，时，分，秒到字符数组中
     if year and month and day then
         command = string.format("date -s '%d-%d-%d %d:%d:%d'", year, month, day, hour, min, sec)
     else
         command = string.format("date -s '%d:%d'",hour, min)
     end
+-- 执行系统命令，执行成功返回0的话保存当前时间，返回真
     if os.execute(command) == 0 then
         os.execute('hwclock -u -w')
         return true

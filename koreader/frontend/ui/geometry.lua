@@ -18,7 +18,7 @@ Just use it on simple tables that have x, y and/or w, h
 or define your own types using this as a metatable
 
 ]]
-
+-- 
 local Math = require("optmath")
 
 --[[--
