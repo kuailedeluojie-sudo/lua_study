@@ -1,3 +1,4 @@
+--加载FFI库
 local ffi = require("ffi")
 
 -- Handle arch-dependent typedefs...
@@ -10,7 +11,7 @@ elseif ffi.abi("64bit") then
 else
     require("ffi/posix_types_def_h")
 end
-
+--为函数添加一个c声明，双括号内的部分只是标准C语法
 ffi.cdef[[
 int pipe(int *) __attribute__((nothrow, leaf));
 int fork(void) __attribute__((nothrow));
@@ -80,3 +81,8 @@ int setenv(const char *, const char *, int) __attribute__((nothrow, leaf));
 int unsetenv(const char *) __attribute__((nothrow, leaf));
 int _putenv(const char *);
 ]]
+--可以用ffi.c.printf("hello %s!","world")调用命名的C函数
+-- lua建立在高级数据类型上，它们是灵活的，可扩展的和动态的。
+--创建一个额外的c文件，添加一个c函数以检索和检查从lua传递的参数类型并调用实际的c函数
+--添加一个模块列表及其名称，添加luaopen_*函数并注册所有模块函数，编译并将其链接到共享库
+--移到正确的路径，添加用于加载模块的lua代码，绑定调用该功能

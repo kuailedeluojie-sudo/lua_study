@@ -1,5 +1,5 @@
 -- high level wrapper module for gettext
-
+--语言设定
 local _ = require("gettext")
 
 local Language = {

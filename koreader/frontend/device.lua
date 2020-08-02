@@ -1,6 +1,6 @@
 local isAndroid, _ = pcall(require, "android")
 local util = require("ffi/util")
-
+--判断当前设备是什么系统之后，加载该设备下的文件
 local function probeDevice()
     if util.isSDL() then
         return require("device/sdl/device")

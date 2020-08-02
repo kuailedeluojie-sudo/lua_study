@@ -6,6 +6,7 @@ local Version = {}
 
 --- Returns current KOReader git-rev.
 -- @treturn string full KOReader git-rev such as `v2015.11-982-g704d4238`
+-- 以只读的方式打开当前目录下的git-rev文件，返回文件内容为软件版本号
 function Version:getCurrentRevision()
     if not self.rev then
         local rev_file = io.open("git-rev", "r")

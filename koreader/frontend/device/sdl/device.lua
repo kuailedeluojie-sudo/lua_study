@@ -121,10 +121,11 @@ local UbuntuTouch = Device:new{
     hasFrontlight = yes,
     home_dir = nil,
 }
-
+--设备初始化
 function Device:init()
     -- allows to set a viewport via environment variable
     -- syntax is Lua table syntax, e.g. EMULATE_READER_VIEWPORT="{x=10,w=550,y=5,h=790}"
+    --获取环境变量
     local viewport = os.getenv("EMULATE_READER_VIEWPORT")
     if viewport then
         self.viewport = require("ui/geometry"):new(loadstring("return " .. viewport)())

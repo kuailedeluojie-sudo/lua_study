@@ -9,7 +9,9 @@ package.cpath =
     package.cpath
 
 -- set search path for 'ffi.load()'
+-- FFI库允许调用外部C函数并 使用纯Lua代码中的C数据结构。
 local ffi = require("ffi")
+-- 加载ffi目录下的posix_h lua文件
 local dummy = require("ffi/posix_h")
 local C = ffi.C
 if ffi.os == "Windows" then
@@ -17,6 +19,7 @@ if ffi.os == "Windows" then
 end
 local ffi_load = ffi.load
 -- patch ffi.load for thirdparty luajit libraries
+-- 把这些库全部加载进来
 ffi.load = function(lib)
     io.write("ffi.load: ", lib, "\n")
     local loaded, re = pcall(ffi_load, lib)

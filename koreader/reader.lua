@@ -29,7 +29,7 @@ pcall(dofile, DataStorage:getDataDir() .. "/defaults.persistent.lua")
 -- Set up Lua and ffi search paths
 -- 加载模块
 require("setupkoenv")
-
+-- 打印版本号，并刷新输出
 io.stdout:write(" [*] Version: ", require("version"):getCurrentRevision(), "\n\n")
 io.stdout:flush()
 
@@ -38,6 +38,7 @@ io.stdout:flush()
 -- they might call gettext on load
 G_reader_settings = require("luasettings"):open(
     DataStorage:getDataDir().."/settings.reader.lua")
+--设置语言
 local lang_locale = G_reader_settings:readSetting("language")
 -- Allow quick switching to Arabic for testing RTL/UI mirroring
 if os.getenv("KO_RTL") then lang_locale = "ar_AA" end
@@ -46,9 +47,11 @@ if lang_locale then
     _.changeLang(lang_locale)
 end
 
+-- 加载c库
 -- Make the C blitter optional (ffi/blitbuffer.lua will check that env var)
 local ffi = require("ffi")
 local dummy = require("ffi/posix_h")
+
 local C = ffi.C
 if G_reader_settings:isTrue("dev_no_c_blitter") then
     if ffi.os == "Windows" then
@@ -125,6 +128,7 @@ while argidx <= #ARGV do
 end
 
 -- Setup device
+--启动设备
 local Device = require("device")
 -- DPI
 local dpi_override = G_reader_settings:readSetting("screen_dpi")
