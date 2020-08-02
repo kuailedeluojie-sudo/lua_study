@@ -1,0 +1,11 @@
+require("ffi_wrapper")
+local Freetype = require("ffi/freetype")
+
+describe("Freetype module", function()
+    it("should create new face without error", function()
+        assert.has_no.errors(function()
+            local face = Freetype.newFace('./fonts/droid/DroidSansMono.ttf', 18)
+            assert.are_not.equals(face, nil)
+        end)
+    end)
+end)

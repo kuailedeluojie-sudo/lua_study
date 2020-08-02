@@ -1,0 +1,117 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    defaultConfig {
+        applicationId "org.koreader.launcher"
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        compileSdkVersion targetSdk
+        versionCode versCode as Integer
+        versionName versName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            resValue "string", "app_name", projectName
+            resValue "string", "app_flavor", projectFlavor
+        }
+
+        debug {
+            minifyEnabled false
+            debuggable true
+            resValue "string", "app_name", projectName
+            resValue "string", "app_flavor", projectFlavor
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile('manifest/base.xml')
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = [ '../assets' ]
+        }
+        fullStorage {
+            manifest.srcFile('manifest/full.xml')
+        }
+        jailedStorage {
+            manifest.srcFile('manifest/jailed.xml')
+        }
+    }
+
+    flavorDimensions 'abi', 'storageModel'
+    productFlavors {
+        x86 {
+            ndk { abiFilters "x86" }
+            dimension = 'abi'
+        }
+        arm {
+            ndk { abiFilters "armeabi-v7a" }
+            dimension = 'abi'
+        }
+        fullStorage {
+            dimension = 'storageModel'
+            buildConfigField 'boolean', 'legacy_storage', 'true'
+        }
+        jailedStorage {
+            dimension = 'storageModel'
+            minSdkVersion safSdk
+            targetSdkVersion latestSdk
+            compileSdkVersion latestSdk
+            buildConfigField 'boolean', 'legacy_storage', 'false'
+        }
+    }
+
+    externalNativeBuild {
+        ndkBuild {
+            path file('../jni/Android.mk')
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError false
+
+        // reflection (used for EPD updates)
+        disable 'PrivateApi'
+
+        // WRITE_SETTINGS permission
+        disable 'ProtectedPermissions'
+
+        // Some application flags cannot be used when targeting low level apis.
+        // This applies to resizeableActivity and usesClearTextTraffic, both available on API level 23 or higher.
+        // And requestLegacyExternalStorage, available on API 29
+        disable 'UnusedAttribute'
+
+        // EPDTestActivity has strings hardcoded in english
+        disable 'SetTextI18n'
+    }
+
+    aaptOptions {
+        cruncherEnabled = false
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "NativeActivity.apk"
+        }
+    }
+}
+
+repositories {
+    google()
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:$androidx_core_version"
+    implementation "androidx.legacy:legacy-support-v4:$androidx_supportv4_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_plugin_version"
+
+    // add Leak Canary on debug variants.
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.1'
+}
