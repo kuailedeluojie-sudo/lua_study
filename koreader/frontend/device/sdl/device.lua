@@ -135,7 +135,7 @@ function Device:init()
     if touchless then
         self.isTouchDevice = no
     end
-
+    --获取环境变量
     local portrait = os.getenv("EMULATE_READER_FORCE_PORTRAIT")
     if portrait then
         self.isAlwaysPortrait = yes
@@ -148,6 +148,7 @@ function Device:init()
     local ok, re = pcall(self.screen.setWindowIcon, self.screen, "resources/koreader.png")
     if not ok then logger.warn(re) end
 
+    --加载模块
     local input = require("ffi/input")
     self.input = require("device/input"):new{
         device = self,

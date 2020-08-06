@@ -1,3 +1,4 @@
+--加载模块
 local util = require("ffi/util")
 
 if util.isSDL() then
