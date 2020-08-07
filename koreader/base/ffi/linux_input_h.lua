@@ -1,5 +1,7 @@
 local ffi = require("ffi")
-
+--加载ffi模块
+--用C语言重新定义变量
+--想买一本luaffi的书籍看一下，听说这个是处理速度最快的脚本语言
 ffi.cdef[[
 static const int EVIOCGRAB = 1074021776;
 static const int EV_SYN = 0;

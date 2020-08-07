@@ -1,5 +1,6 @@
 local ffi = require("ffi")
-
+--加载FFI模块，然后用C语言定义类型
+--把sdl的函数，枚举，结构体等等变量都包含了进来
 ffi.cdef[[
 typedef long unsigned int Uint64;
 typedef long int Sint64;

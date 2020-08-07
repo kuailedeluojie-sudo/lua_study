@@ -1,11 +1,12 @@
 --[[--
 Module for interfacing SDL 2.0 video/input facilities
-
+--SDL 2.0视频/输入设备接口模块
 This module is intended to provide input/output facilities on a
 typical desktop (rather than a dedicated e-ink reader, for which
 there would probably be raw framebuffer/input device access
 instead).
-
+--这个模块主要是在典型的桌面上提供输入/输出功能
+--不是专用的电子墨水阅读器，可能会有原始的帧缓冲/输入设备访问
 @module ffi.sdl2_0
 ]]
 
@@ -13,8 +14,9 @@ local bit = require("bit")
 local ffi = require("ffi")
 local util = require("ffi/util")
 local C = ffi.C
-
+--加载SDL2_0_H的模块
 local dummy = require("ffi/SDL2_0_h")
+--加载Linux的输入模块
 local dummy = require("ffi/linux_input_h")
 
 -----------------------------------------------------------------

@@ -1,4 +1,5 @@
 -- load common SDL input/video library
+--这里直接加载了SDL的输入，晚上备注SDL
 local SDL = require("ffi/SDL2_0")
 
 return {
