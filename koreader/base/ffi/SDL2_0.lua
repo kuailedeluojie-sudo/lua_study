@@ -1,4 +1,3 @@
---
 --[[--
 Module for interfacing SDL 2.0 video/input facilities
 --SDL 2.0视频/输入设备接口模块
@@ -7,7 +6,8 @@ typical desktop (rather than a dedicated e-ink reader, for which
 there would probably be raw framebuffer/input device access
 instead).
 --这个模块主要是在典型的桌面上提供输入/输出功能
---不是专用的电子墨水阅读器，可能会有原始的帧缓冲/输入设备访问
+--不是专用的电子墨水阅读器，可能会有原始的帧缓冲/输入设备访问】
+--dd
 @module ffi.sdl2_0
 ]]
 
@@ -266,8 +266,8 @@ function S.waitForEvent(usecs)
         -- if we got an event, examine it here and generate
         -- events for koreader
         if ffi.os == "OSX" and (event.type == SDL.SDL_FINGERMOTION or
-            event.type == SDL.SDL_FINGERDOWN or
-            event.type == SDL.SDL_FINGERUP) then
+            event.type == SDL.SDL_FINGERDOWN or --
+            event.type == SDL.SDL_FINGERUP) then --
             -- noop for trackpad finger inputs which interfere with emulated mouse inputs
             do end -- luacheck: ignore 541
         elseif event.type == SDL.SDL_KEYDOWN then
@@ -305,8 +305,8 @@ function S.waitForEvent(usecs)
             genEmuEvent(C.EV_ABS, C.ABS_MT_TRACKING_ID, -1)
             genEmuEvent(C.EV_SYN, C.SYN_REPORT, 0)
         elseif event.type == SDL.SDL_MOUSEBUTTONDOWN
-            or event.type == SDL.SDL_FINGERDOWN then
-            local is_finger = event.type == SDL.SDL_FINGERDOWN
+            or event.type == SDL.SDL_FINGERDOWN then --
+            local is_finger = event.type == SDL.SDL_FINGERDOWN --
             if not is_finger and event.button.button ~= SDL_BUTTON_LEFT then
                 return
             end
