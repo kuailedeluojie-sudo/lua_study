@@ -277,7 +277,7 @@ function S.waitForEvent(usecs)
         elseif event.type == SDL.SDL_MOUSEMOTION
             or event.type == SDL.SDL_FINGERMOTION then
             local is_finger = event.type == SDL.SDL_FINGERMOTION
-            if is_in_touch then
+            if is_in_touch then --
                 if is_finger then
                     if event.tfinger.dx ~= 0 then
                         genEmuEvent(C.EV_ABS, C.ABS_MT_POSITION_X,
