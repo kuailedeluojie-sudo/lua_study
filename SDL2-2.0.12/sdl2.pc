@@ -11,5 +11,5 @@ Version: 2.0.12
 Requires:
 Conflicts:
 Libs: -L${libdir} -Wl,-rpath,${libdir} -Wl,--enable-new-dtags -lSDL2
-Libs.private: -lSDL2  -Wl,--no-undefined -lm -ldl -Wl,-rpath,/opt/vc/lib -L/opt/vc/lib -lbcm_host -lpthread -lrt
-Cflags: -I${includedir}/SDL2  -I/opt/vc/include -I/opt/vc/include/interface/vcos/pthreads -I/opt/vc/include/interface/vmcs_host/linux  -D_REENTRANT
+Libs.private: -lSDL2  -Wl,--no-undefined -lm -ldl -lpthread -lrt
+Cflags: -I${includedir}/SDL2   -D_REENTRANT
