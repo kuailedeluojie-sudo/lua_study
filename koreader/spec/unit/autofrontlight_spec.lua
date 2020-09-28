@@ -1,3 +1,4 @@
+--
 describe("AutoFrontlight widget tests", function()
     local Device, PowerD, MockTime, class, AutoFrontlight, UIManager
 
