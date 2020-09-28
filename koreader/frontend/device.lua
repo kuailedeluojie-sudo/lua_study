@@ -46,7 +46,7 @@ local function probeDevice()
     -- if --[[ implement a proper test instead --]] false then
     --     return require("device/newport/device")
     -- end
-
+    --加载设备文件
     error("Could not find hardware abstraction for this platform. If you are trying to run the emulator, please ensure SDL is installed.")
 end
 
