@@ -789,3 +789,5 @@ end
 SDL.SDL_DestroyRenderer(rend)
 SDL.SDL_DestroyWindow(win)
 SDL.SDL_Quit()
+
+--test
