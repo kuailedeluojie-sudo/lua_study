@@ -39,7 +39,7 @@ local noop = function() end
 local Logger = {
     levels = LOG_LVL,
 }
-
+--定义打印信息
 local function log(log_lvl, dump_lvl, ...)
     local line = ""
     for i,v in ipairs({...}) do
@@ -65,6 +65,7 @@ local function log(log_lvl, dump_lvl, ...)
     end
 end
 
+--确定传进来的参数匹配这个表格中的那个参数
 local LVL_FUNCTIONS = {
     dbg = function(...) log('dbg', DEFAULT_DUMP_LVL, ...) end,
     info = function(...) log('info', DEFAULT_DUMP_LVL, ...) end,
@@ -72,7 +73,7 @@ local LVL_FUNCTIONS = {
     err = function(...) log('err', DEFAULT_DUMP_LVL, ...) end,
 }
 
-
+--设置打印等级
 --[[--
 Set logging level. By default, level is set to info.
 
@@ -84,13 +85,13 @@ Logger:setLevel(Logger.levels.warn)
 function Logger:setLevel(new_lvl)
     for lvl_name, lvl_value in pairs(LOG_LVL) do
         if new_lvl <= lvl_value then
-            self[lvl_name] = LVL_FUNCTIONS[lvl_name]
+            self[lvl_name] = LVL_FUNCTIONS[lvl_name] --匹配到参数
         else
             self[lvl_name] = noop
         end
     end
 end
 
-Logger:setLevel(LOG_LVL.info)
+Logger:setLevel(LOG_LVL.info) --设置打印等级
 
 return Logger

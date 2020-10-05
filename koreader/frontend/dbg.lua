@@ -27,7 +27,7 @@ local function LvDEBUG(lv, ...)
         io.stdout:flush()
     end
 end
-
+--打开调试信息
 function Dbg:turnOn()
     if self.is_on == true then return end
     self.is_on = true
@@ -56,7 +56,7 @@ function Dbg:turnOn()
     -- create or clear ev log file
     self.ev_log = io.open("ev.log", "w")
 end
-
+--关闭调试信息
 function Dbg:turnOff()
     if self.is_on == false then return end
     self.is_on = false

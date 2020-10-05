@@ -69,7 +69,7 @@ end
 
 -- Should check DEBUG option in arg and turn on DEBUG before loading other
 -- modules, otherwise DEBUG in some modules may not be printed.
-local dbg = require("dbg")
+local dbg = require("dbg")--加载dbg文件，注释
 if G_reader_settings:isTrue("debug") then dbg:turnOn() end
 if G_reader_settings:isTrue("debug") and G_reader_settings:isTrue("debug_verbose") then dbg:setVerbose(true) end
 
