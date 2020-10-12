@@ -1,3 +1,4 @@
+#!/usr/bin/env luajit
 local ffi = require("ffi")
 if ffi.os == "Windows" then
 	SDL = ffi.load("SDL2")
