@@ -1,7 +1,7 @@
 --[[--
 This module manages widgets.
 ]]
-
+--管理小部件的模块
 local Device = require("device")
 local Event = require("ui/event")
 local Geom = require("ui/geometry")

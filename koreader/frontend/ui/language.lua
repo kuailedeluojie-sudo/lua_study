@@ -1,7 +1,7 @@
 -- high level wrapper module for gettext
 --语言设定
 local _ = require("gettext")
-
+--确定好语言之后要有一个输入法
 local Language = {
     language_names = {
         C = "English",
