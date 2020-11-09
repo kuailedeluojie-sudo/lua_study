@@ -754,6 +754,7 @@ void SDL_DestroyRenderer(SDL_Renderer* renderer);
 int SDL_SetRenderDrawColor(SDL_Renderer* renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 int SDL_RenderClear(SDL_Renderer* renderer);
 void SDL_RenderPresent(SDL_Renderer* renderer);
+int SDL_ShowCursor(int toggle);
 ]]
 SDL_QUIT = 0x100
 SDL_WINDOWPOS_CENTERED_MASK = 0x2FFF0000
@@ -765,6 +766,7 @@ SDL_FINGERDOWN = 0x700
 SDL_FINGERUP = 0x701
 SDL_FINGERMOTION = 0x702
 SDL.SDL_Init(0x20)
+SDL.SDL_ShowCursor(false)
 win = SDL.SDL_CreateWindow("abc", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0)
 rend = SDL.SDL_CreateRenderer(win, -1, 0)
 need_quit = false
